@@ -4,8 +4,8 @@ The Dockerfile comprises a smoke test that verifies whether the compiled server 
 
 # Example usage
 
-   docker pull karm/mod_cluster-master-dockerhub
-   docker run -d -P -i --name mod_cluster karm/mod_cluster-master-dockerhub
-   docker ps
-   +++ snip +++
-   curl 127.0.0.1:49157/mcm
+    docker pull karm/mod_cluster-master-dockerhub
+    docker run -d -P -i --name mod_cluster karm/mod_cluster-master-dockerhub
+    docker ps
+    +++ snip +++
+    curl 127.0.0.1:49157/mcm
