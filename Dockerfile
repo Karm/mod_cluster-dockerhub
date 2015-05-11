@@ -12,7 +12,7 @@ MAINTAINER Michal Karm Babacek <karm@redhat.com>
 ENV HTTPD_BRANCH        2.4.12
 ENV APR_BRANCH          1.5.1
 ENV APR_UTIL_BRANCH     1.5.4
-ENV MOD_CLUSTER_BRANCH  master
+ENV MOD_CLUSTER_BRANCH  1.3.1.Final
 
 # All 4 mod_cluster modules are required. Their names may vary across versions.
 ENV MOD_CLUSTER_MODULES advertise mod_cluster_slotmem mod_manager mod_proxy_cluster
