@@ -1,4 +1,4 @@
-FROM fedora:20
+FROM fedora:22
 MAINTAINER Michal Karm Babacek <karm@redhat.com>
 
 ##
