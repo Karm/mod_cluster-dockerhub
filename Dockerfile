@@ -25,7 +25,7 @@ ENV MOD_CLUSTER_DIST    https://github.com/modcluster/mod_cluster/archive/${MOD_
 
 # Compile time dependencies we shall get rid off in the same layer where
 # the compilation takes place.
-ENV COMPILETIME_DEPS   binutils libtool openssl-devel unzip make autoconf gcc find file which
+ENV COMPILETIME_DEPS   binutils libtool openssl-devel unzip make autoconf gcc file which
 
 ENV HTTPD_MC_BUILD_DIR  /opt/httpd-build
 
@@ -42,7 +42,7 @@ WORKDIR /opt
 ADD ${HTTPD_DIST} ${APR_DIST} ${APR_UTIL_DIST} ${MOD_CLUSTER_DIST} /opt/
 
 # Note erratic indentation around ./configure. It's on purpose because of http://goo.gl/DgDsbD
-RUN yum -y update && yum -y install ${COMPILETIME_DEPS} && yum clean all
+RUN dnf -y update && dnf -y install ${COMPILETIME_DEPS} && dnf clean all
 RUN unzip ${HTTPD_BRANCH}.zip && rm -rf ${HTTPD_BRANCH}.zip && \
     unzip ${APR_BRANCH}.zip && mv apr-* httpd-${HTTPD_BRANCH}/srclib/apr && rm -rf ${APR_BRANCH}.zip && \
     unzip ${APR_UTIL_BRANCH}.zip && mv apr-util* httpd-${HTTPD_BRANCH}/srclib/apr-util && rm -rf ${APR_UTIL_BRANCH}.zip && \
