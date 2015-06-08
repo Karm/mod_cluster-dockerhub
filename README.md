@@ -26,5 +26,6 @@ One may base one's own images on this ```karm/mod_cluster-master-dockerhub``` as
 Note that ```HTTPD_MC_BUILD_DIR``` as well as other ```ENV ``` constants are propagated to your Dockerfile. 
 
 #Notes
-
+ 
+ * 2015-06-08 - master branch Docker image updated from Fedora 20 to Fedora 22. Enjoy! 
  * 2015-05-07 - [mod_cluster 1.3.1.Final released](https://developer.jboss.org/wiki/ModclusterVersion131FinalReleased), Includes a fix for [CVE-2015-0298](https://access.redhat.com/security/cve/CVE-2015-0298) and more!
