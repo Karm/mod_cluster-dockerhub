@@ -69,7 +69,7 @@ RUN sed -i 's/LogLevel warn/LogLevel debug/g' ${HTTPD_MC_BUILD_DIR}/conf/httpd.c
     echo "Include conf/extra/httpd-mpm.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     echo "Include conf/extra/httpd-default.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     echo "Include conf/extra/mod_cluster.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
-    echo "ServerName `hostname`" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
+    echo "ServerName `head -n1 /etc/hostname`" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     ${HTTPD_MC_BUILD_DIR}/bin/apachectl start && sleep 5 && \
     cat ${HTTPD_MC_BUILD_DIR}/logs/error_log  && \
     cat ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
