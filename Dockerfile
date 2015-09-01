@@ -49,9 +49,9 @@ RUN unzip ${HTTPD_BRANCH}.zip && rm -rf ${HTTPD_BRANCH}.zip && \
     unzip ${MOD_CLUSTER_BRANCH}.zip && rm -rf ${MOD_CLUSTER_BRANCH}.zip && \
     cd /opt/httpd-${HTTPD_BRANCH} && \
     ./buildconf && ./configure --prefix=${HTTPD_MC_BUILD_DIR} --with-mpm=worker --enable-mods-shared=most \
---enable-maintainer-mode --with-expat=builtin --enable-ssl --enable-proxy --enable-proxy-http \
---enable-proxy-ajp --disable-proxy-balancer --with-threads \
-&& make && make install && \
+        --enable-maintainer-mode --with-expat=builtin --enable-ssl --enable-proxy --enable-proxy-http \
+        --enable-proxy-ajp --disable-proxy-balancer --with-threads \
+    && make && make install && \
     cd /opt/mod_cluster-${MOD_CLUSTER_BRANCH}/native && \
     for module in ${MOD_CLUSTER_MODULES};do cd $module; \
         ./buildconf && ./configure --with-apxs=${HTTPD_MC_BUILD_DIR}/bin/apxs \
@@ -63,7 +63,7 @@ RUN unzip ${HTTPD_BRANCH}.zip && rm -rf ${HTTPD_BRANCH}.zip && \
 ## Test
 
 # Configuration and smoke test
-ADD mod_cluster.conf ${HTTPD_MC_BUILD_DIR}/conf/extra/mod_cluster.conf
+COPY mod_cluster.conf ${HTTPD_MC_BUILD_DIR}/conf/extra/mod_cluster.conf
 RUN cat  ${HTTPD_MC_BUILD_DIR}/conf/extra/mod_cluster.conf
 RUN sed -i 's/LogLevel warn/LogLevel debug/g' ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     echo "Include conf/extra/httpd-mpm.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
@@ -86,5 +86,9 @@ EXPOSE 80/tcp
 EXPOSE 6666/tcp
 EXPOSE 23364/udp
 
-CMD ["/opt/httpd-build/bin/apachectl","start", "-DFOREGROUND"]
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["start", "-DFOREGROUND"]
 
