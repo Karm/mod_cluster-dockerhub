@@ -76,7 +76,6 @@ RUN sed -i 's/LogLevel warn/LogLevel debug/g' ${HTTPD_MC_BUILD_DIR}/conf/httpd.c
     grep "Apache/" ${HTTPD_MC_BUILD_DIR}/logs/error_log && \
     grep "mod_cluster/.* configured -- resuming normal operations" ${HTTPD_MC_BUILD_DIR}/logs/error_log && \
     grep "update_workers_node starting" ${HTTPD_MC_BUILD_DIR}/logs/error_log && \
-    grep "update_workers_node starting" ${HTTPD_MC_BUILD_DIR}/logs/error_log && \
     [ "`grep -c 'error\|Segmentation fault\|Invalid argument\|mismatch detected' ${HTTPD_MC_BUILD_DIR}/logs/error_log`" -eq 0 ] && \
     ${HTTPD_MC_BUILD_DIR}/bin/apachectl stop && \
     rm -rf ${HTTPD_MC_BUILD_DIR}/logs/* && rm -rf ${HTTPD_MC_BUILD_DIR}/cache/*
