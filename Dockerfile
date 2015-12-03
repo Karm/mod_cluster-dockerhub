@@ -9,7 +9,7 @@ MAINTAINER Michal Karm Babacek <karm@redhat.com>
 ## Constants
 
 # A git branch or a tag; whatever one finds on project's upstream GitHub.
-ENV HTTPD_BRANCH        2.4.12
+ENV HTTPD_BRANCH        2.4.17
 ENV APR_BRANCH          1.5.1
 ENV APR_UTIL_BRANCH     1.5.4
 ENV MOD_CLUSTER_BRANCH  master
