@@ -42,7 +42,7 @@ WORKDIR /opt
 ADD ${HTTPD_DIST} ${APR_DIST} ${APR_UTIL_DIST} ${MOD_CLUSTER_DIST} /opt/
 
 # Note erratic indentation around ./configure. It's on purpose because of http://goo.gl/DgDsbD
-RUN dnf -y update && dnf -y install ${COMPILETIME_DEPS} && dnf clean all
+RUN dnf -y update && dnf -y install iproute ${COMPILETIME_DEPS} && dnf clean all
 RUN unzip ${HTTPD_BRANCH}.zip && rm -rf ${HTTPD_BRANCH}.zip && \
     unzip ${APR_BRANCH}.zip && mv apr-* httpd-${HTTPD_BRANCH}/srclib/apr && rm -rf ${APR_BRANCH}.zip && \
     unzip ${APR_UTIL_BRANCH}.zip && mv apr-util* httpd-${HTTPD_BRANCH}/srclib/apr-util && rm -rf ${APR_UTIL_BRANCH}.zip && \
@@ -69,7 +69,6 @@ RUN sed -i 's/LogLevel warn/LogLevel debug/g' ${HTTPD_MC_BUILD_DIR}/conf/httpd.c
     echo "Include conf/extra/httpd-mpm.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     echo "Include conf/extra/httpd-default.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     echo "Include conf/extra/mod_cluster.conf" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
-    echo "ServerName `head -n1 /etc/hostname`" >> ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
     ${HTTPD_MC_BUILD_DIR}/bin/apachectl start && sleep 5 && \
     cat ${HTTPD_MC_BUILD_DIR}/logs/error_log  && \
     cat ${HTTPD_MC_BUILD_DIR}/conf/httpd.conf && \
@@ -86,8 +85,9 @@ EXPOSE 6666/tcp
 EXPOSE 23364/udp
 
 COPY docker-entrypoint.sh /
+#ensure the script is executable
+RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["start", "-DFOREGROUND"]
-
