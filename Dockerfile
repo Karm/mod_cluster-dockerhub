@@ -12,7 +12,7 @@ MAINTAINER Michal Karm Babacek <karm@redhat.com>
 ENV HTTPD_BRANCH        2.4.17
 ENV APR_BRANCH          1.5.1
 ENV APR_UTIL_BRANCH     1.5.4
-ENV MOD_CLUSTER_BRANCH  master
+ENV MOD_CLUSTER_BRANCH  1.3.10.Final
 
 # All 4 mod_cluster modules are required. Their names may vary across versions.
 ENV MOD_CLUSTER_MODULES advertise mod_cluster_slotmem mod_manager mod_proxy_cluster
@@ -30,7 +30,7 @@ ENV COMPILETIME_DEPS   binutils libtool openssl-devel unzip make autoconf gcc fi
 ENV HTTPD_MC_BUILD_DIR  /opt/httpd-build
 
 # Meh...
-ENV CFLAGS -O2
+ENV CFLAGS "-Wno-error=declaration-after-statement -O2"
 
 ## Build
 
