@@ -62,6 +62,10 @@ EOT
 		echo
 	fi
 
+	echo "-- Cleaning lock files."
+	rm -f /opt/httpd-build/logs/httpd.pid
+	rm -f /opt/httpd-build/logs/authdigest_shm.*
+
 	echo "-- ${HTTPD_MC_BUILD_DIR}/bin/apachectl $@"
 	${HTTPD_MC_BUILD_DIR}/bin/apachectl "$@"
 else
